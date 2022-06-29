@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for n in lenta %}
+    <h2>{{ lenta[n]["title"] }}</h2>
+    <a href="{{ lenta[n]['link'] }}">{{ lenta[n]["link"] }}</a>
+{% endfor %}
+</body>
+</html>
