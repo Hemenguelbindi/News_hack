@@ -19,9 +19,10 @@ async def all_news(request: Request):
 	lenta_news = await parser_lenta_hacker_news()
 	habr_news = await pick_all_titles_and_link_on_HABR()
 	return templates.TemplateResponse(
-		"main.html",
+		"index.html",
 		{
 			'request': request,
 			'lenta': lenta_news,
+			'habr': habr_news,
 			}
 		)

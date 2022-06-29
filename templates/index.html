@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for n in lenta %}
+        <div class="container">
+            <article class="content">
+                <h2>{{ lenta[n]["title"] }}</h2>
+                <a href="{{ lenta[n]['link'] }}">{{ lenta[n]["link"] }}</a>
+            </article>
+        </div>
+    {% endfor %}
+{% endblock %}
