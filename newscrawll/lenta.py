@@ -2,12 +2,13 @@ import asyncio
 import aiohttp
 from lxml import etree
 from fake_useragent import UserAgent
-from newscrawll.const import LENTA_HACKER_NEWS
+
 
 ua = UserAgent()
 
 headers = {'User-Agent':str(ua.random)}
 
+LENTA_HACKER_NEWS="https://lenta.ru/rubrics/media/hackers/"
 
 
 async def connect_site(session, url):
