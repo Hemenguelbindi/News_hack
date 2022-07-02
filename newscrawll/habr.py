@@ -1,8 +1,19 @@
 import asyncio
 import aiohttp
+
 from lxml import etree
-from newscrawll.lenta import connect_site, headers
-from newscrawll.const import HABR_NEWS
+
+from fake_useragent import UserAgent
+
+
+ua = UserAgent()
+headers = {'User-Agent':str(ua.random)}
+HABR_NEWS = "https://habr.com/ru/news/"
+
+
+async def connect_site(session, url):
+	async with session.get(url) as res:
+		return await res.text()
 
 
 async def pick_all_titles_and_link_on_HABR():
