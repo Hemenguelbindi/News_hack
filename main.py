@@ -26,3 +26,8 @@ async def all_news(request: Request):
 			'habr': habr_news,
 			}
 		)
+
+
+@app.get('/about', response_class=HTMLResponse)
+async def about(request: Request):
+	return templates.TemplateResponse('about.html', {'request': request,})
