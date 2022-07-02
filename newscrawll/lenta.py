@@ -1,14 +1,14 @@
 import asyncio
 import aiohttp
+
 from lxml import etree
+
 from fake_useragent import UserAgent
 
-
 ua = UserAgent()
+headers = {'User-Agent': str(ua.random)}
+LENTA_HACKER_NEWS = "https://lenta.ru/rubrics/media/hackers/"
 
-headers = {'User-Agent':str(ua.random)}
-
-LENTA_HACKER_NEWS="https://lenta.ru/rubrics/media/hackers/"
 
 
 async def connect_site(session, url):
@@ -29,8 +29,6 @@ async def parser_lenta_hacker_news():
 		return data
 
 
-
-	
 if __name__ == '__main__':
 	loop = asyncio.get_event_loop()
 	loop.run_until_complete(parser_lenta_hacker_news())

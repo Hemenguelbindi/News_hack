@@ -8,6 +8,7 @@ from .newscrawll.lenta import parser_lenta_hacker_news
 from .newscrawll.habr import pick_all_titles_and_link_on_HABR
 
 
+
 app = FastAPI()
 script_dir = os.path.dirname(__file__)
 st_abs_file_path = os.path.join(script_dir, "static/")

@@ -1,8 +1,18 @@
 import asyncio
 import aiohttp
+
 from lxml import etree
+
 from fake_useragent import UserAgent
 
+ua = UserAgent()
+headers = {'User-Agent':str(ua.random)}
+HABR_NEWS = "https://habr.com/ru/news/"
+
+
+async def connect_site(session, url):
+	async with session.get(url) as res:
+		return await res.text()
 
 ua = UserAgent()
 
