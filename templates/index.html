@@ -1,12 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for n in lenta %}
-        <div class="container">
-            <article class="content">
-                <h2>{{ lenta[n]["title"] }}</h2>
-                <a href="{{ lenta[n]['link'] }}">{{ lenta[n]["link"] }}</a>
-            </article>
+<div class="container-xxl dark">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Lenta.ru</h2>
+            <hr />
+            {% for n in lenta %}
+                <article class="col">
+                    <a href="{{ lenta[n]['link'] }}" class="nav-link link-color"><h3>{{ lenta[n]["title"] }}</h3>
+                    </a>
+                    <time>{{ lenta[n]['time']}}</time>
+                </article>
+            {% endfor %}
         </div>
-    {% endfor %}
+        <div class="col-sm-6">
+            <h2>HabrNews</h2>
+            <hr />
+            {% for n in habr %}
+            <article>
+                <a href="{{ habr[n]['link'] }}" class="nav-link link-color"><h3>{{ habr[n]["title"] }}</h3>
+                </a>
+                <time>{{ habr[n]["time"]}}</time>
+            </article>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

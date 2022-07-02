@@ -24,7 +24,7 @@ async def parser_lenta_hacker_news():
 		time = tree.xpath("//*[@class='rubric-page']//time/text()")
 		data = {}
 		for i in range(len(titles)):
-			data[i+1] = {"title": titles[i], "link": links[i], "data": time[i]}
+			data[i+1] = {"title": titles[i], "link": links[i], "time": time[i]}
 		return data
 
 
