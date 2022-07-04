@@ -139,7 +139,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+news_hack/
 # Spyder project settings
 .spyderproject
 .spyproject
