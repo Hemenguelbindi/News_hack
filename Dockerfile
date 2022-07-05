@@ -1,12 +1,13 @@
-FROM python:3.10
+FROM python:3.10-slim
 
-WORKDIR /news_hack
+WORKDIR /app
 
-COPY ./requirements.txt /news_hack/requirements.txt
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-RUN pip install --no-cache-dir --upgrade -r /news_hack/requirements.txt
+COPY requirements.txt ./
 
-COPY .  /news_hack/app
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+COPY . .
+EXPOSE 8000
