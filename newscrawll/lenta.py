@@ -1,33 +1,28 @@
+import httpx
 import asyncio
-import aiohttp
 
 from lxml import etree
 
 from fake_useragent import UserAgent
 
 ua = UserAgent()
-headers = {'User-Agent': str(ua.random)}
+headers = {'User-Agent': str(ua.google)}
 LENTA_HACKER_NEWS = "https://lenta.ru/rubrics/media/hackers/"
 
 
-async def connect_site(session, url):
-    async with session.get(url) as res:
-        return await res.text()
-
-
-async def parser_lenta_hacker_news():
-    async with aiohttp.ClientSession(headers=headers) as session:
-        page_news = await connect_site(session, LENTA_HACKER_NEWS)
-        tree = etree.HTML(page_news)
+async def pick_all_lenta_hacker_news():
+    async with httpx.AsyncClient() as client:
+        page_news = await client.get(LENTA_HACKER_NEWS, headers=headers)
+        tree = etree.HTML(page_news.text)
         titles = tree.xpath("//*[@class='rubric-page']//h3/text()")
         links = ["https://lenta.ru" + link for link in tree.xpath("//*[@class='rubric-page']//li/a/@href")]
         time = tree.xpath("//*[@class='rubric-page']//time/text()")
-        data = {}
+        news = {}
         for i in range(len(titles)):
-            data[i+1] = {"title": titles[i], "link": links[i], "time": time[i]}
-        return data
+            news[i+1] = {"title": titles[i], "link": links[i], "time": time[i]}
+        return news
 
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(parser_lenta_hacker_news())
+    loop.run_until_complete(pick_all_lenta_hacker_news())
