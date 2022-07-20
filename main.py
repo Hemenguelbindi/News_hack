@@ -4,8 +4,7 @@ from fastapi.responses import HTMLResponse
 from pathlib import Path
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from newscrawll import lenta
-from newscrawll import habr
+from write_in_redis import cached_lenta_ru, cached_habr_news
 
 
 app = FastAPI()
@@ -21,13 +20,15 @@ templates = Jinja2Templates(directory=str(Path(BASE_DIR, 'templates')))
 
 @app.get("/", response_class=HTMLResponse)
 async def all_news(request: Request):
-    lenta_news = await lenta.pick_all_lenta_hacker_news()
-    habr_news = await habr.pick_all_titles_and_link_on_HABR()
+    lenta_news = await cached_lenta_ru()
+    habr_news = await cached_habr_news()
+    print(type(habr_news))
     return templates.TemplateResponse("index.html",
                                       {
                                           'request': request,
                                           'lenta': lenta_news,
-                                          'habr': habr_news, })
+                                          'habr': habr_news,
+                                          })
 
 
 @app.get('/about', response_class=HTMLResponse)
