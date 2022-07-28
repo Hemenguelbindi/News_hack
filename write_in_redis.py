@@ -17,7 +17,7 @@ async def cached_habr_news():
 
 
 async def cached_lenta_ru():
-    redis = aioredis.from_url("redis://redis_cache")
+    redis = aioredis.from_url("redis://redis_cache:6579")
     cache_value = await redis.get("news_lenta")
     if cache_value is not None:
         return json.loads(cache_value)
