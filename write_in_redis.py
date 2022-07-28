@@ -8,7 +8,7 @@ from newscrawll.lenta import pick_all_lenta_hacker_news
 
 
 async def cached_habr_news():
-    redis = aioredis.from_url("redis://redis_cache:6579")
+    redis = aioredis.from_url("redis://redis_cache")
     cache_value = await redis.get("news_habr")
     if cache_value is not None:
         return json.loads(cache_value)
@@ -17,7 +17,7 @@ async def cached_habr_news():
 
 
 async def cached_lenta_ru():
-    redis = aioredis.from_url("redis://redis_cache:6579")
+    redis = aioredis.from_url("redis://redis_cache")
     cache_value = await redis.get("news_lenta")
     if cache_value is not None:
         return json.loads(cache_value)
