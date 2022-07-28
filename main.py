@@ -22,7 +22,6 @@ templates = Jinja2Templates(directory=str(Path(BASE_DIR, 'templates')))
 async def all_news(request: Request):
     lenta_news = await cached_lenta_ru()
     habr_news = await cached_habr_news()
-    print(type(habr_news))
     return templates.TemplateResponse("index.html",
                                       {
                                           'request': request,
