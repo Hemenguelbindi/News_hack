@@ -19,7 +19,8 @@ async def pick_all_lenta_hacker_news():
         time = tree.xpath("//*[@class='rubric-page']//time/text()")
         news = {}
         for i in range(len(titles)):
-            news[i+1] = {"title": titles[i], "link": links[i], "time": time[i]}
+            if i <= 20:
+                news[i+1] = {"title": titles[i], "link": links[i], "time": time[i]}
         return news
 
 
