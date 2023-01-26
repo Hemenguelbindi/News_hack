@@ -19,7 +19,8 @@ async def pick_all_titles_and_link_on_HABR():
         time_date = tree.xpath("//*[@class='tm-articles-list__item']//time/text()")
         news = {}
         for i in range(len(titles)):
-            news[i+1] = {"title": titles[i], "link": links[i], "time": time_date[i]}
+            if i <= 20:
+                news[i+1] = {"title": titles[i], "link": links[i], "time": time_date[i]}
         return news
 
 

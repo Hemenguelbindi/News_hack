@@ -8,6 +8,7 @@ from write_in_redis import cached_lenta_ru, cached_habr_news
 
 
 app = FastAPI()
+
 script_dir = os.path.dirname(__file__)
 st_abs_file_path = os.path.join(script_dir, "static/")
 app.mount("/static", StaticFiles(directory=st_abs_file_path), name="static")
